@@ -99,7 +99,43 @@ Unityエディタの"Hierarchy"タブから`Environment`というオブジェク
 このチュートリアルの場合は，2.で作成したフォルダ（`Assets/(自分の苗字)_NE/`）を丸ごと提出していただければ大丈夫です．
 （提出する際に`.meta`ファイルも含まれていることを確認してください．）
 
-## 対戦
+## 対戦環境と同じセンサを使って学習させる方法
+既存のNE/NE_challenge/QのSceneでは、学習に用いている車のオブジェクトが対戦で用いているものと違うため、限られたセンサ情報しか取得できません。
+ここでは、学習環境を対応させる方法を説明します。
+1. 対戦用のStage1をシーンとして開き、その中のset1/BattleCar_Blueをコピーします。(選択してctrl-cでコピー可能)
+<img width="278" alt="image" src="https://user-images.githubusercontent.com/49557322/199195141-73c8b8bb-adfa-4532-9502-748177437d91.png">
+
+2. 対応させたい学習環境を開き、コピーしたものをペーストします。ここではNEのChallenge1を例に取ります。(ctrl-vでペースト可能)
+<img width="261" alt="image" src="https://user-images.githubusercontent.com/49557322/199202703-f4132cf2-eb39-406c-b8e3-7ec951d2fae3.png">
+
+3. BattleCar_Blueをクリックし、右側のインスペクタのLayerの部分をPlayerに変えます。
+<img width="334" alt="image" src="https://user-images.githubusercontent.com/49557322/199197987-a3a7e608-d9b5-4ef1-8c8c-7c936ae1cc4a.png">
+
+4. BattleCar_Blue->Sensors->Sensors_0_Playerをクリックし、インスペクタからLayerNameをPlayerにします。これは、センサが認識する車のレイヤを変える処理です。
+Sensors_1/2/3_Playerに関しても同様にします。
+<img width="333" alt="image" src="https://user-images.githubusercontent.com/49557322/199201317-fbc71c61-d6c4-40a1-85aa-66691978c382.png">
+
+レイヤを変える前と後で、車が認識されるようになっているのがわかるかと思います。(赤いレイは車を感知していることを示している。)\
+変更前\
+<img width="527" alt="image" src="https://user-images.githubusercontent.com/49557322/199201943-dbada362-8f9e-44a9-a119-ca3a24c1edda.png">\
+変更後\
+<img width="662" alt="image" src="https://user-images.githubusercontent.com/49557322/199201610-0416ed37-099e-4bf9-a29a-5b5c4da2991d.png">
+
+5. BattleCar_BuleのPositionをコースごとのスタートの位置に変えます。スタートの位置はCar@Blueと同じ位置、角度にしてあげれば大丈夫です。
+<img width="331" alt="image" src="https://user-images.githubusercontent.com/49557322/199203179-8f589325-33f7-4c0d-b316-c6e82ea64be6.png">
+
+6.Environmentオブジェクトをクリックし、インスペクタからNE EnvironmentのInput Sizeを46に変更し、Agent PrefabにBattleCar_BlueをHierarchyからドラッグアンドドロップで設定します。\
+<img width="336" alt="image" src="https://user-images.githubusercontent.com/49557322/199203411-5160fb42-05a2-4227-b631-9cba4c582538.png">
+
+7.NEEnvironment.csのAgentUpdate関数内で、CollectObservations関数を用いていたのをGetAllObservations関数に変えてあげます。\
+<img width="388" alt="image" src="https://user-images.githubusercontent.com/49557322/199203781-2f4f2caa-a633-4717-9557-25daf674d15c.png">
+
+8. シーンを実行します。
+
+
+
+
+
 
 
 ## 今回のAI開発の基本的な流れ
