@@ -110,7 +110,9 @@ Unityエディタの"Hierarchy"タブから`Environment`というオブジェク
 2. 対応させたい学習環境を開き、コピーしたものをペーストします。ここではNEのChallenge1を例に取ります。(ctrl-vでペースト可能)
 <img width="261" alt="image" src="https://user-images.githubusercontent.com/49557322/199202703-f4132cf2-eb39-406c-b8e3-7ec951d2fae3.png">
 
-3. BattleCar_Blueをクリックし、右側のインスペクタのLayerの部分をPlayerに変えます。
+3. BattleCar_Blueをクリックし、右側のインスペクタのLayerの部分をPlayerに変えます。  
+**注意**：この時、子オブジェクトのLayerも変更するか聞かれますが、"Yes"にして子オブジェクトのLayerも変更して下さい。
+
 <img width="334" alt="image" src="https://user-images.githubusercontent.com/49557322/199197987-a3a7e608-d9b5-4ef1-8c8c-7c936ae1cc4a.png">
 
 4. BattleCar_Blue->Sensors->Sensors_0_Playerをクリックし、インスペクタからLayerNameをPlayerにします。これは、センサが認識する車のレイヤを変える処理です。
