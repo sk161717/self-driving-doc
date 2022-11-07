@@ -136,10 +136,56 @@ Sensors_1/2/3_Playerに関しても同様にします。
 
 8. シーンを実行します。
 
+### 入力変数（observation）の一部だけ使用して学習する方法
 
+`NEEnvironment.cs`を以下のように書き換える．
+下の例では，前方の対壁センサー5つ（0～4）と車のx, z速度（40, 42）を取り出しています．
 
+```cs
+    private void AgentUpdate(Agent a, NNBrain b) {
+        var observation = a.CollectObservations();
+        var rearranged = RearrangeObservation(observation, new List<int>(){0, 1, 2, 3, 4, 40, 42})
+        var action = b.GetAction(observation);
+        a.AgentAction(action);
+    }
 
+    // BattleBrain.cs にあるのをコピペ
+    protected List<double> RearrangeObservation(List<double> observation, List<int> indexesToUse)
+    {
+        if(observation == null || indexesToUse == null) return null;
 
+        List<double> rearranged = new List<double>();
+        foreach(int index in indexesToUse)
+        {
+            if(index >= observation.Count)
+            {
+                rearranged.Add(0);
+                continue;
+            }
+            rearranged.Add(observation[index]);
+        }
+
+        return rearranged;
+    }
+```
+
+その後，インスペクタからNE EnvironmentのInput Sizeを自分が使用する次元数（上の例なら7）に設定する必要があります．
+
+対戦環境で走らせるためのBattleBrainは，以下のようにして作成できます．
+
+```cs
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "BattleBrain/YourNameBattleBrain")]
+public class YourNameBattleBrain : NNBattleBrain
+{
+    protected override List<double> ProcessObservation(List<double> observation)
+    {
+        return RearrangeObservation(observation, new List<int>(){0, 1, 2, 3, 4, 40, 42});
+    }
+}
+```
 
 
 ## 今回のAI開発の基本的な流れ
