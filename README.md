@@ -325,7 +325,7 @@ public override void Initialize() {
 - (自分の苗字小文字)BattleBrain.asset\
 上のBrainをasset化したものです。[今回のAI開発の基本的な流れ](#今回のAI開発の基本的な流れ)で説明した方法によって作られるものです。（エディタ上では拡張子`.asset`は省略されていますが，下のようなアイコンのファイルです．）\
 ![BattleBrainAssetIcon](Pictures/BattleBrain_icon.png)
-- データファイル\
+- (自分の苗字小文字)data.(json,pth,txtなど任意の拡張子)\
 (自分の苗字小文字)BattleBrainで用いるデータファイルです。ニューロ進化におけるNNの重みやQ学習におけるQテーブルがこれに相当します。
 - 上記3種のファイルのmetaファイル\
 metaファイルはそれぞれのファイルと同フォルダ内に自動生成されるファイルです。
