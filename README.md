@@ -144,8 +144,8 @@ Sensors_1/2/3_Playerに関しても同様にします。
 ```cs
     private void AgentUpdate(Agent a, NNBrain b) {
         var observation = a.CollectObservations();
-        var rearranged = RearrangeObservation(observation, new List<int>(){0, 1, 2, 3, 4, 40, 42})
-        var action = b.GetAction(observation);
+        var rearranged = RearrangeObservation(observation, new List<int>(){0, 1, 2, 3, 4, 40, 42});
+        var action = b.GetAction(rearranged);
         a.AgentAction(action);
     }
 
